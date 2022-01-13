@@ -13,21 +13,22 @@ public class UserService {
     @Autowired
     private UserRepository repo;
 
+    //listing all the Users
     public List<User> listAll() {
         return repo.findAll();
     }
 
-    //Function for saving the user
+    //Saving User to DB
     public void save(User user) {
         repo.save(user);
     }
 
-    //Function for finding the user by id
+    //finding User by username
     public User get(String username) {
         return repo.findById(username).get();
     }
 
-    //Function for deleting the user
+    //Deleting User from DB
     public void delete(String username) {
         repo.deleteById(username);
     }
