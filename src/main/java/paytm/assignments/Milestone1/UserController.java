@@ -44,4 +44,26 @@ public class UserController {
         }
     }
 
+    @PutMapping("/user/{username}")
+    public ResponseEntity update(@RequestBody User user, @PathVariable String username) {
+
+        try {
+            User existUser = service.get(username);
+            service.save(user);
+            return ResponseEntity.status(HttpStatus.OK).body(user);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
+    @DeleteMapping("/user/{username}")
+    public String delete(@PathVariable String username){
+        try {
+            User existUser = service.get(username);
+            service.delete(username);
+            return "User deleted successfully";
+        } catch (NoSuchElementException e) {
+            return "User not found";
+        }
+    }
 }
