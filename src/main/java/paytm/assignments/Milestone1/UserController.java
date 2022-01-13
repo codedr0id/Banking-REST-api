@@ -3,9 +3,7 @@ package paytm.assignments.Milestone1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,12 +20,27 @@ public class UserController {
     }
 
     @GetMapping("/users/{username}")
-    public ResponseEntity<User> get(@PathVariable String username) {
+    public ResponseEntity get(@PathVariable String username) {
         try {
             User user = service.get(username);
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            return ResponseEntity.status(HttpStatus.OK).body(user);
         } catch (NoSuchElementException e) {
-            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Username does not exist.");
+        }
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity add(@RequestBody User user){
+        String err = user.check();
+        if (service.duplicates(user)){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User already exists");
+        }
+        else if(err != "ok"){
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Please enter "+err);
+        }
+        else{
+            service.save(user);
+            return ResponseEntity.status(HttpStatus.OK).body(user);
         }
     }
 

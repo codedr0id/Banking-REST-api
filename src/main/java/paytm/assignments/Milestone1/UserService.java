@@ -32,4 +32,9 @@ public class UserService {
     public void delete(String username) {
         repo.deleteById(username);
     }
+
+    //check for duplicates
+    public boolean duplicates(User user){
+        return repo.existsById(user.getUsername()) || repo.existsById(user.getEmail()) || repo.existsById(user.getMobile());
+    }
 }

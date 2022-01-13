@@ -93,4 +93,16 @@ public class User {
     public void setAddress2(String address2) {
         this.address2 = address2;
     }
+
+    //checking if the requirements are met or not
+    public String check(){
+        if (username == null || username == "") return "username";
+        if (firstname == null || firstname == "") return "firstname";
+        if (lastname == null || lastname == "") return "lastname";
+        if (mobile == null || mobile == "") return "mobile";
+        if (email == null || email == "") return "email";
+        if (address1 == null || address1 =="") return "address";
+
+        return "ok";
+    }
 }
