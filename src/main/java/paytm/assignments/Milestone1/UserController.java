@@ -14,11 +14,13 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    //List of Users
     @GetMapping("/users")
     public List<User> list() {
         return service.listAll();
     }
 
+    //GET method with validations
     @GetMapping("/users/{username}")
     public ResponseEntity get(@PathVariable String username) {
         try {
@@ -29,21 +31,21 @@ public class UserController {
         }
     }
 
+    //POST method with validations
     @PostMapping("/user")
-    public ResponseEntity add(@RequestBody User user){
+    public ResponseEntity add(@RequestBody User user) {
         String err = user.check();
-        if (service.duplicates(user)){
+        if (service.duplicates(user)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User already exists");
-        }
-        else if(err != "ok"){
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Please enter "+err);
-        }
-        else{
+        } else if (err != "ok") {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Please enter " + err);
+        } else {
             service.save(user);
             return ResponseEntity.status(HttpStatus.OK).body(user);
         }
     }
 
+    //PUT method with validations
     @PutMapping("/user/{username}")
     public ResponseEntity update(@RequestBody User user, @PathVariable String username) {
 
@@ -56,8 +58,9 @@ public class UserController {
         }
     }
 
+    //DELETE method with validations
     @DeleteMapping("/user/{username}")
-    public String delete(@PathVariable String username){
+    public String delete(@PathVariable String username) {
         try {
             User existUser = service.get(username);
             service.delete(username);
