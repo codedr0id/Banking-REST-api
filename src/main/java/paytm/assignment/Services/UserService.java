@@ -1,7 +1,9 @@
-package paytm.assignments.Milestone1;
+package paytm.assignment.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import paytm.assignment.Models.User;
+import paytm.assignment.Repositories.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;

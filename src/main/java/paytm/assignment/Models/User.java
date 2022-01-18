@@ -1,4 +1,4 @@
-package paytm.assignments.Milestone1;
+package paytm.assignment.Models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

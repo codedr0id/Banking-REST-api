@@ -1,4 +1,4 @@
-package paytm.assignments.Milestone1;
+package paytm.assignment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

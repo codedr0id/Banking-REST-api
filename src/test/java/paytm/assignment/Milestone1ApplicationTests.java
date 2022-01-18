@@ -1,4 +1,4 @@
-package paytm.assignments.Milestone1;
+package paytm.assignment;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
