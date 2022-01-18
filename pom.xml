@@ -8,11 +8,11 @@
 		<version>2.6.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>paytm.assignments</groupId>
-	<artifactId>Milestone-1</artifactId>
+	<groupId>paytm.assignment</groupId>
+	<artifactId>Banking-REST-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Milestone-1</name>
-	<description>REST Application of User Management using SpringBoot</description>
+	<name>Banking-REST-api</name>
+	<description>REST Application of Banking using SpringBoot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
