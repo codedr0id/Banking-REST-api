@@ -30,6 +30,11 @@ public class UserService {
         return repo.findById(username).get();
     }
 
+    //finding User by mobileNo.
+    public User getByPhoneNo(String mobileNo){
+        return repo.findByMobile(mobileNo);
+    }
+
     //Deleting User from DB
     public void delete(String username) {
         repo.deleteById(username);

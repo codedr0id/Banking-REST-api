@@ -5,4 +5,5 @@ import paytm.assignment.Models.User;
 
 //Repository Interface
 public interface UserRepository extends JpaRepository<User, String> {
+    User findByMobile(String mobile);
 }

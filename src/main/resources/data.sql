@@ -1,0 +1,2 @@
+INSERT INTO bankdb.user VALUES ('godfather', 'Udaipur', 'Raj', 'mehullathi@gmail.com', 'Mehul', false, 'Lathi', '8875019993')
+INSERT INTO bankdb.user VALUES ('sparky', 'Meerut', 'UP', 'ujjwal@gmail.com', 'Ujjwal', false, 'Shrivastava', '9027256094')

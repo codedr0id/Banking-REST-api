@@ -23,11 +23,13 @@ public class User {
     private String address1;
     private String address2;
 
+    private boolean isWalletActive;
+
     public User() {
     }
 
     //Constructor
-    public User(String username, String firstname, String lastname, String email, String mobile, String address1, String address2) {
+    public User(String username, String firstname, String lastname, String email, String mobile, String address1, String address2, boolean isWalletActive) {
         this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -35,6 +37,7 @@ public class User {
         this.mobile = mobile;
         this.address1 = address1;
         this.address2 = address2;
+        this.isWalletActive = false;
     }
 
     //Getters and Setters
@@ -92,6 +95,14 @@ public class User {
 
     public void setAddress2(String address2) {
         this.address2 = address2;
+    }
+
+    public boolean isWalletActive() {
+        return isWalletActive;
+    }
+
+    public void setWalletActive(boolean walletActive) {
+        isWalletActive = walletActive;
     }
 
     //checking if the requirements are met or not
