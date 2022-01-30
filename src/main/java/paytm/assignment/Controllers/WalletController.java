@@ -23,7 +23,28 @@ public class WalletController {
     public String createWallet(@PathVariable("mobileNo") String mobileNo) {
         if (Objects.equals(walletService.createWallet(mobileNo), "Wallet created")) {
             return "Wallet created successfully";
+        } else if (Objects.equals(walletService.createWallet(mobileNo), "User not found")) {
+            return "Create user first";
         }
         return "Wallet already exists";
+    }
+
+    @PostMapping("/deposit/{mobileNo}/{amount}")
+    public String deposit(@PathVariable("mobileNo") String mobileNo, @PathVariable("amount") int amount) {
+        if (Objects.equals(walletService.deposit(mobileNo, (double) amount), "Money added")) {
+            return "Deposit successful";
+        }
+        return "Deposit failed";
+    }
+
+    @PostMapping("/transfer/{payerMobileNo}/{payeeMobileNo}/{amount}")
+    public String transfer(@PathVariable("payerMobileNo") String payerMobileNo, @PathVariable("payeeMobileNo") String payeeMobileNo, @PathVariable("amount") int amount) {
+        if (Objects.equals(walletService.transfer(payerMobileNo, payeeMobileNo, (double) amount), "Money transferred")) {
+            return "Transfer successful";
+        }
+        else if (Objects.equals(walletService.transfer(payerMobileNo, payeeMobileNo, (double) amount), "Insufficient balance")) {
+            return "Insufficient funds in your account";
+        }
+        return "Transfer failed";
     }
 }

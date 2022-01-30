@@ -17,12 +17,16 @@ public class WalletService {
     @Autowired
     private UserService service;
 
-    public List<Wallet> getAllWallets(){
+    public List<Wallet> getAllWallets() {
         return repo.findAll();
     }
 
     public String createWallet(String mobileNo) {
         User user = service.getByPhoneNo(mobileNo);
+
+        if (user == null){
+            return "User not found";
+        }
 
         if (!user.isWalletActive()) {
             user.setWalletActive(true);
@@ -35,15 +39,56 @@ public class WalletService {
 
     }
 
-    public String deposit(Wallet wallet) {
-        User user = service.getByPhoneNo(wallet.getMobileNo());
+    public String deposit(String mobileNo, Double amount) {
+        User user = service.getByPhoneNo(mobileNo);
+
+        if (user == null){
+            return "User not found";
+        }
 
         if (!user.isWalletActive()) {
             return "Create wallet first";
+        } else if (amount <= 0) {
+            return "Amount should be greater than 0";
         }
 
+        Wallet wallet = repo.findByMobileNo(mobileNo);
+        wallet.setBalance(wallet.getBalance() + amount);
         repo.save(wallet);
         return "Money added";
+    }
 
+    public String transfer(String payerNo, String payeeNo, Double amount) {
+        User payer = service.getByPhoneNo(payerNo);
+        User payee = service.getByPhoneNo(payeeNo);
+
+        if (payer == null){
+            return "Payer not found";
+        }
+
+        if (payee == null){
+            return "Payee not found";
+        }
+
+        if (!payer.isWalletActive()) {
+            return "Create Payer's wallet first";
+        } else if (!payee.isWalletActive()) {
+            return "Create Payee's wallet first";
+        } else if (amount <= 0) {
+            return "Amount should be greater than 0";
+        }
+
+        Wallet payerWallet = repo.findByMobileNo(payerNo);
+        Wallet payeeWallet = repo.findByMobileNo(payeeNo);
+
+        if (payerWallet.getBalance() < amount) {
+            return "Insufficient balance";
+        }
+
+        payerWallet.setBalance(payerWallet.getBalance() - amount);
+        payeeWallet.setBalance(payeeWallet.getBalance() + amount);
+        repo.save(payerWallet);
+        repo.save(payeeWallet);
+        return "Money transferred";
     }
 }
