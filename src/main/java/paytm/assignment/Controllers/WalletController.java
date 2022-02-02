@@ -1,12 +1,21 @@
 package paytm.assignment.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import paytm.assignment.DTO.ResponseObject;
+import paytm.assignment.DTO.TransferDetails;
+import paytm.assignment.Exceptions.AmountGreaterThanZero;
+import paytm.assignment.Exceptions.UserNotFound;
+import paytm.assignment.Exceptions.WalletNotFound;
 import paytm.assignment.Models.Wallet;
 import paytm.assignment.Services.WalletService;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 public class WalletController {
@@ -20,31 +29,33 @@ public class WalletController {
     }
 
     @PostMapping("/create-wallet/{mobileNo}")
-    public String createWallet(@PathVariable("mobileNo") String mobileNo) {
-        if (Objects.equals(walletService.createWallet(mobileNo), "Wallet created")) {
-            return "Wallet created successfully";
-        } else if (Objects.equals(walletService.createWallet(mobileNo), "User not found")) {
-            return "Create user first";
+    public ResponseEntity<ResponseObject> createWallet(@PathVariable("mobileNo") String mobileNo) {
+        try {walletService.createWallet(mobileNo);
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.CREATED.value(), "Wallet created", walletService.getWallet(mobileNo)), HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.FORBIDDEN.value(), e.getLocalizedMessage(), null), HttpStatus.FORBIDDEN);
+
         }
-        return "Wallet already exists";
     }
 
     @PostMapping("/deposit/{mobileNo}/{amount}")
-    public String deposit(@PathVariable("mobileNo") String mobileNo, @PathVariable("amount") int amount) {
-        if (Objects.equals(walletService.deposit(mobileNo, (double) amount), "Money added")) {
-            return "Deposit successful";
+    public ResponseEntity<ResponseObject> deposit(@PathVariable("mobileNo") String mobileNo, @PathVariable("amount") int amount) throws UserNotFound, AmountGreaterThanZero, WalletNotFound {
+        try {
+            walletService.deposit(mobileNo, (double) amount);
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.OK.value(), "Money added", walletService.getWallet(mobileNo)), HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.FORBIDDEN.value(), e.getLocalizedMessage(), null), HttpStatus.FORBIDDEN);
         }
-        return "Deposit failed";
+
     }
 
     @PostMapping("/transfer/{payerMobileNo}/{payeeMobileNo}/{amount}")
-    public String transfer(@PathVariable("payerMobileNo") String payerMobileNo, @PathVariable("payeeMobileNo") String payeeMobileNo, @PathVariable("amount") int amount) {
-        if (Objects.equals(walletService.transfer(payerMobileNo, payeeMobileNo, (double) amount), "Money transferred")) {
-            return "Transfer successful";
+    public ResponseEntity<ResponseObject> transfer(@PathVariable("payerMobileNo") String payerMobileNo, @PathVariable("payeeMobileNo") String payeeMobileNo, @PathVariable("amount") Double amount) {
+        try {
+            walletService.transfer(payerMobileNo, payeeMobileNo, (Double) amount);
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.OK.value(), "Transfer successful", new TransferDetails(payerMobileNo, payeeMobileNo, amount)), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.FORBIDDEN.value(), e.getLocalizedMessage(), new TransferDetails(payerMobileNo, payeeMobileNo, amount)), HttpStatus.FORBIDDEN);
         }
-        else if (Objects.equals(walletService.transfer(payerMobileNo, payeeMobileNo, (double) amount), "Insufficient balance")) {
-            return "Insufficient funds in your account";
-        }
-        return "Transfer failed";
     }
 }

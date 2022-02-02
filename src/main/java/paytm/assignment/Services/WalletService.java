@@ -2,10 +2,13 @@ package paytm.assignment.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import paytm.assignment.Exceptions.*;
+import paytm.assignment.Models.Transaction;
 import paytm.assignment.Models.User;
 import paytm.assignment.Models.Wallet;
 import paytm.assignment.Repositories.WalletRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -17,74 +20,88 @@ public class WalletService {
     @Autowired
     private UserService service;
 
+    @Autowired
+    private TransactionService transactionService;
+
     public List<Wallet> getAllWallets() {
         return repo.findAll();
     }
 
-    public String createWallet(String mobileNo) {
+    public Wallet getWallet(String mobileNo) {
+        return repo.findByMobileNo(mobileNo);
+    }
+
+    public String createWallet(String mobileNo) throws WalletAlreadyExists, UserNotFound {
         User user = service.getByPhoneNo(mobileNo);
 
         if (user == null){
-            return "User not found";
+            throw new UserNotFound("");
         }
 
-        if (!user.isWalletActive()) {
-            user.setWalletActive(true);
-            Wallet wallet = new Wallet(mobileNo, 0);
-            repo.save(wallet);
-            return "Wallet created";
+        if (user.isWalletActive()) {
+            throw new WalletAlreadyExists();
         }
 
-        return "Wallet exists already";
+        user.setWalletActive(true);
+        Wallet wallet = new Wallet(mobileNo, 0);
+        repo.save(wallet);
+        return "Wallet created";
 
     }
 
-    public String deposit(String mobileNo, Double amount) {
+    public String deposit(String mobileNo, Double amount) throws WalletNotFound, UserNotFound, AmountGreaterThanZero {
         User user = service.getByPhoneNo(mobileNo);
 
         if (user == null){
-            return "User not found";
+            throw new UserNotFound("");
         }
 
         if (!user.isWalletActive()) {
-            return "Create wallet first";
+            throw new WalletNotFound("");
         } else if (amount <= 0) {
-            return "Amount should be greater than 0";
+            throw new AmountGreaterThanZero();
         }
 
+        System.out.println(amount);
         Wallet wallet = repo.findByMobileNo(mobileNo);
         wallet.setBalance(wallet.getBalance() + amount);
         repo.save(wallet);
+        Transaction transaction = new Transaction(mobileNo, "self", amount, "Deposit", new Date());
+        transactionService.saveTransaction(transaction);
         return "Money added";
     }
 
-    public String transfer(String payerNo, String payeeNo, Double amount) {
+    public String transfer(String payerNo, String payeeNo, Double amount) throws UserNotFound, WalletNotFound, AmountGreaterThanZero, InsufficientBalance {
         User payer = service.getByPhoneNo(payerNo);
         User payee = service.getByPhoneNo(payeeNo);
 
         if (payer == null){
-            return "Payer not found";
+            throw new UserNotFound("Payer");
         }
 
         if (payee == null){
-            return "Payee not found";
+            throw new UserNotFound("Payee");
         }
 
         if (!payer.isWalletActive()) {
-            return "Create Payer's wallet first";
+            throw new WalletNotFound(("Payer's"));
         } else if (!payee.isWalletActive()) {
-            return "Create Payee's wallet first";
+            throw new WalletNotFound(("Payee's"));
         } else if (amount <= 0) {
-            return "Amount should be greater than 0";
+            throw new AmountGreaterThanZero();
         }
 
         Wallet payerWallet = repo.findByMobileNo(payerNo);
         Wallet payeeWallet = repo.findByMobileNo(payeeNo);
 
         if (payerWallet.getBalance() < amount) {
-            return "Insufficient balance";
+            throw new InsufficientBalance();
         }
 
+        Transaction transaction = new Transaction(payerNo, payeeNo, amount, "Transfer", new Date());
+        transactionService.saveTransaction(transaction);
+//        payerWallet.addTransaction(transactionService.getTransaction(transaction.getId()));
+//        payerWallet.addTransaction(transactionService.getTransaction(transaction.getId()));
         payerWallet.setBalance(payerWallet.getBalance() - amount);
         payeeWallet.setBalance(payeeWallet.getBalance() + amount);
         repo.save(payerWallet);

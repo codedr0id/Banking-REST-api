@@ -1,13 +1,17 @@
 package paytm.assignment.Models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Wallet {
     @Id
+    @Column(name = "mobile_no")
     private String mobileNo;
     private double balance;
+
+//    @OneToMany(targetEntity = Transaction.class, cascade = CascadeType.ALL)
+//    private List<Transaction> transactions;
 
     public Wallet() {
     }
@@ -32,4 +36,12 @@ public class Wallet {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+//    public List<Transaction> getTransactions() {
+//        return transactions;
+//    }
+//
+//    public void addTransaction(Transaction transaction) {
+//        this.transactions.add(transaction);
+//    }
 }
