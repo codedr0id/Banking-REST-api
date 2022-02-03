@@ -45,7 +45,7 @@ public class WalletService {
         user.setWalletActive(true);
         Wallet wallet = new Wallet(mobileNo, 0);
         repo.save(wallet);
-        return "Wallet created";
+        return "Wallet created successfully";
 
     }
 
@@ -62,13 +62,12 @@ public class WalletService {
             throw new AmountGreaterThanZero();
         }
 
-        System.out.println(amount);
         Wallet wallet = repo.findByMobileNo(mobileNo);
         wallet.setBalance(wallet.getBalance() + amount);
         repo.save(wallet);
         Transaction transaction = new Transaction(mobileNo, "self", amount, "Deposit", new Date());
         transactionService.saveTransaction(transaction);
-        return "Money added";
+        return "Deposit successful";
     }
 
     public String transfer(String payerNo, String payeeNo, Double amount) throws UserNotFound, WalletNotFound, AmountGreaterThanZero, InsufficientBalance {
@@ -106,6 +105,6 @@ public class WalletService {
         payeeWallet.setBalance(payeeWallet.getBalance() + amount);
         repo.save(payerWallet);
         repo.save(payeeWallet);
-        return "Money transferred";
+        return "Money transferred successfully";
     }
 }

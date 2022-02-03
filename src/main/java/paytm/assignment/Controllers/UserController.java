@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import paytm.assignment.DTO.ResponseObject;
 import paytm.assignment.Models.User;
 import paytm.assignment.Services.UserService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @RestController
 public class UserController {
@@ -24,51 +26,53 @@ public class UserController {
 
     //GET method with validations
     @GetMapping("/users/{username}")
-    public ResponseEntity get(@PathVariable String username) {
+    public ResponseEntity<ResponseObject> get(@PathVariable String username) {
+        User user = null;
         try {
-            User user = service.get(username);
-            return ResponseEntity.status(HttpStatus.OK).body(user);
+            user = service.get(username);
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.OK.value(), "User found successfully", user), HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Username does not exist.");
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.NOT_FOUND.value(), "User not found", user), HttpStatus.NOT_FOUND);
         }
     }
 
     //POST method with validations
     @PostMapping("/user")
-    public ResponseEntity add(@RequestBody User user) {
+    public ResponseEntity<ResponseObject> add(@RequestBody User user) {
         String err = user.check();
         if (service.duplicates(user)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User already exists");
-        } else if (err != "ok") {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Please enter " + err);
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.FORBIDDEN.value(), "User already exists", user), HttpStatus.FORBIDDEN);
+        } else if (!Objects.equals(err, "ok")) {
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.FORBIDDEN.value(), "Please enter " + err, user), HttpStatus.FORBIDDEN);
         } else {
             service.save(user);
-            return ResponseEntity.status(HttpStatus.OK).body(user);
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.OK.value(), "User created successfully", user), HttpStatus.OK);
+
         }
     }
 
     //PUT method with validations
     @PutMapping("/user/{username}")
-    public ResponseEntity update(@RequestBody User user, @PathVariable String username) {
+    public ResponseEntity<ResponseObject> update(@RequestBody User user, @PathVariable String username) {
 
         try {
-            User existUser = service.get(username);
             service.save(user);
-            return ResponseEntity.status(HttpStatus.OK).body(user);
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.OK.value(), "User updated successfully", user), HttpStatus.OK);
         } catch (NoSuchElementException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.NOT_FOUND.value(), "User not found", null), HttpStatus.NOT_FOUND);
         }
     }
 
     //DELETE method with validations
     @DeleteMapping("/user/{username}")
-    public String delete(@PathVariable String username) {
+    public ResponseEntity<ResponseObject> delete(@PathVariable String username) {
         try {
             User existUser = service.get(username);
             service.delete(username);
-            return "User deleted successfully";
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.OK.value(), "User found successfully", existUser), HttpStatus.OK);
+
         } catch (NoSuchElementException e) {
-            return "User not found";
+            return new ResponseEntity<>(new ResponseObject(HttpStatus.NOT_FOUND.value(), "User not found, so cannot delete", null), HttpStatus.NOT_FOUND);
         }
     }
 }

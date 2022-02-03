@@ -21,8 +21,8 @@ public class UserService {
     }
 
     //Saving User to DB
-    public void save(User user) {
-        repo.save(user);
+    public User save(User user) {
+        return repo.save(user);
     }
 
     //finding User by username
@@ -31,7 +31,7 @@ public class UserService {
     }
 
     //finding User by mobileNo.
-    public User getByPhoneNo(String mobileNo){
+    public User getByPhoneNo(String mobileNo) {
         return repo.findByMobile(mobileNo);
     }
 
@@ -41,7 +41,7 @@ public class UserService {
     }
 
     //check for duplicates
-    public boolean duplicates(User user){
+    public boolean duplicates(User user) {
         return repo.existsById(user.getUsername()) || repo.existsById(user.getEmail()) || repo.existsById(user.getMobile());
     }
 }
