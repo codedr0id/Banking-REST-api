@@ -1,2 +1,2 @@
-# User REST api
-REST Application of User Management using SpringBoot
+# Banking REST api
+REST Application of Banking Application using SpringBoot
