@@ -38,7 +38,15 @@ public class Wallet {
         this.balance = balance;
     }
 
-//    public List<Transaction> getTransactions() {
+    @Override
+    public String toString() {
+        return "Wallet{" +
+                "mobileNo='" + mobileNo + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
+
+    //    public List<Transaction> getTransactions() {
 //        return transactions;
 //    }
 //

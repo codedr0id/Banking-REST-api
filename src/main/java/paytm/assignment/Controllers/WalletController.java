@@ -28,6 +28,11 @@ public class WalletController {
         return walletService.getAllWallets();
     }
 
+    @GetMapping("/wallet/{mobileNo}")
+    public Wallet getWallet(@PathVariable("mobileNo") String mobileNo) {
+        return walletService.getWallet(mobileNo);
+    }
+
     @PostMapping("/create-wallet/{mobileNo}")
     public ResponseEntity<ResponseObject> createWallet(@PathVariable("mobileNo") String mobileNo) {
         try {walletService.createWallet(mobileNo);

@@ -101,6 +101,20 @@ public class User {
         return isWalletActive;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", address1='" + address1 + '\'' +
+                ", address2='" + address2 + '\'' +
+                ", isWalletActive=" + isWalletActive +
+                '}';
+    }
+
     public void setWalletActive(boolean walletActive) {
         isWalletActive = walletActive;
     }

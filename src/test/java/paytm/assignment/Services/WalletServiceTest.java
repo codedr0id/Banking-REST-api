@@ -1,72 +1,77 @@
 package paytm.assignment.Services;
 
-import org.assertj.core.api.Assertions;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import paytm.assignment.Exceptions.AmountGreaterThanZero;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import paytm.assignment.Exceptions.UserNotFound;
 import paytm.assignment.Exceptions.WalletAlreadyExists;
-import paytm.assignment.Exceptions.WalletNotFound;
+import paytm.assignment.Models.Wallet;
+import paytm.assignment.Repositories.WalletRepository;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class WalletServiceTest {
 
+    @MockBean
+    private WalletRepository walletRepository;
+
     @Autowired
-    WalletService walletService;
+    private WalletService walletService;
 
-    @Test
-    @DisplayName("Test for wallet creation success")
-    void createWalletSuccess() throws UserNotFound, WalletAlreadyExists {
-//        User user = new User("godfather", "Mehul", "Lathi", "mehullathi1999@gmail.com", "8875019993", "Udaipur", "Raj", false);
-//        Mockito.when(userRepository.save(user)).thenReturn(user).;
-//        assertEquals(walletService.createWallet("8875019993"), "Wallet created successfully");
-        Assertions.assertThat(walletService.createWallet("8875019993")).isEqualTo("Wallet created successfully");
+    Wallet wallet1, wallet2;
+
+    @BeforeEach
+    void create() throws IOException {
+
+        String wallet1Req = "src/test/java/paytm/assignment/json/Wallet1Req.json";
+        String requestJSON1 = new String(Files.readAllBytes(Paths.get(wallet1Req)));
+
+        String wallet2Req = "src/test/java/paytm/assignment/json/Wallet2Req.json";
+        String requestJSON2 = new String(Files.readAllBytes(Paths.get(wallet2Req)));
+
+        wallet1 = new ObjectMapper().readValue(requestJSON1, Wallet.class);
+        wallet2 = new ObjectMapper().readValue(requestJSON2, Wallet.class);
     }
 
     @Test
-    @DisplayName("Test for wallet creation where user not found")
-    void createWalletUserNotFound() {
-        Assertions.assertThatThrownBy(() -> walletService.createWallet("8875019992")).isInstanceOf(UserNotFound.class);
+    @DisplayName("Test for getting a wallet")
+    void getWallet() {
+
+        Mockito.when(walletRepository.findByMobileNo(wallet1.getMobileNo())).thenReturn(wallet1);
+        assertEquals(walletService.getWallet(wallet1.getMobileNo()), wallet1);
     }
 
     @Test
-    @DisplayName("Test for wallet creation where wallet already exists")
-    void createWalletAlreadyExists() {
-        Assertions.assertThatThrownBy(() -> walletService.createWallet("7014219283")).isInstanceOf(WalletAlreadyExists.class);
+    @DisplayName("Test for getting all wallets")
+    void getAllWallets() {
+        Mockito.when(walletRepository.findAll()).thenReturn(java.util.Arrays.asList(wallet1, wallet2));
+        assertEquals(walletService.getAllWallets().size(), 2);
     }
 
     @Test
-    @DisplayName("Test for deposit success")
-    void depositSuccess() throws UserNotFound, AmountGreaterThanZero, WalletNotFound {
-        Assertions.assertThat(walletService.deposit("7014219283", 1000.0)).isEqualTo("Deposit successful");
+    @DisplayName("Test for creating a new wallet")
+    void createWallet() throws WalletAlreadyExists, UserNotFound {
+        Mockito.when(walletRepository.save(wallet1)).thenReturn(wallet1);
+        assertEquals(wallet1.toString(), walletService.createWallet(wallet1.getMobileNo()).toString());
     }
 
     @Test
-    @DisplayName("Test for deposit where user not found")
-    void depositUserNotFound() {
-        Assertions.assertThatThrownBy(() -> walletService.deposit("8875019992", 1000.0)).isInstanceOf(UserNotFound.class);
+    @DisplayName("Test for deleting a wallet")
+    void delete() {
+        walletService.deleteWallet(wallet1.getMobileNo());
+        Mockito.verify(walletRepository, Mockito.times(1)).deleteById(wallet1.getMobileNo());
     }
-
-    @Test
-    @DisplayName("Test for deposit where amount is less than 0")
-    void depositAmountGreaterThan0() {
-        Assertions.assertThatThrownBy(() -> walletService.deposit("7014219283", -1000.0)).isInstanceOf(AmountGreaterThanZero.class);
-    }
-
-    @Test
-    @DisplayName("Test for deposit where user not found")
-    void depositWalletNotFound() {
-        Assertions.assertThatThrownBy(() -> walletService.deposit("9027256094", 1000.0)).isInstanceOf(WalletNotFound.class);
-    }
-
-
-//    @Test
-//    @DisplayName("Test for Wallet Transfer")
-//    void transferSuccess() throws UserNotFound, WalletAlreadyExists, AmountGreaterThanZero, WalletNotFound, InsufficientBalance {
-//        walletService.createWallet("8875019993");
-//        walletService.deposit("8875019993", 1000.0);
-//        Assertions.assertThat(walletService.transfer("8875019993", "7014219283", 300.0)).isEqualTo("Money transferred successfully");
-//    }
 }

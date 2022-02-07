@@ -31,10 +31,14 @@ public class WalletService {
         return repo.findByMobileNo(mobileNo);
     }
 
-    public String createWallet(String mobileNo) throws WalletAlreadyExists, UserNotFound {
+    public void deleteWallet(String mobileNo) {
+        repo.deleteById(mobileNo);
+    }
+
+    public Wallet createWallet(String mobileNo) throws WalletAlreadyExists, UserNotFound {
         User user = service.getByPhoneNo(mobileNo);
 
-        if (user == null){
+        if (user == null) {
             throw new UserNotFound("");
         }
 
@@ -43,22 +47,25 @@ public class WalletService {
         }
 
         user.setWalletActive(true);
-        Wallet wallet = new Wallet(mobileNo, 0);
+        Wallet wallet = new Wallet();
+        wallet.setMobileNo(mobileNo);
+        wallet.setBalance(0.0);
         repo.save(wallet);
-        return "Wallet created successfully";
+        return wallet;
 
     }
 
-    public String deposit(String mobileNo, Double amount) throws WalletNotFound, UserNotFound, AmountGreaterThanZero {
+    public Wallet deposit(String mobileNo, Double amount) throws WalletNotFound, UserNotFound, AmountGreaterThanZero {
         User user = service.getByPhoneNo(mobileNo);
 
-        if (user == null){
+        if (user == null) {
             throw new UserNotFound("");
         }
 
         if (!user.isWalletActive()) {
-            throw new WalletNotFound("");
-        } else if (amount <= 0) {
+            throw new WalletNotFound("");}
+
+        if (amount <= 0) {
             throw new AmountGreaterThanZero();
         }
 
@@ -67,26 +74,26 @@ public class WalletService {
         repo.save(wallet);
         Transaction transaction = new Transaction(mobileNo, "self", amount, "Deposit", new Date());
         transactionService.saveTransaction(transaction);
-        return "Deposit successful";
+        return wallet;
     }
 
-    public String transfer(String payerNo, String payeeNo, Double amount) throws UserNotFound, WalletNotFound, AmountGreaterThanZero, InsufficientBalance {
+    public Transaction transfer(String payerNo, String payeeNo, Double amount) throws UserNotFound, WalletNotFound, AmountGreaterThanZero, InsufficientBalance {
         User payer = service.getByPhoneNo(payerNo);
         User payee = service.getByPhoneNo(payeeNo);
 
-        if (payer == null){
+        if (payer == null) {
             throw new UserNotFound("Payer");
         }
 
-        if (payee == null){
+        if (payee == null) {
             throw new UserNotFound("Payee");
         }
 
-        if (!payer.isWalletActive()) {
-            throw new WalletNotFound(("Payer's"));
-        } else if (!payee.isWalletActive()) {
-            throw new WalletNotFound(("Payee's"));
-        } else if (amount <= 0) {
+//        if (!payer.isWalletActive()) {
+//            throw new WalletNotFound(("Payer's"));
+//        } else if (!payee.isWalletActive()) {
+//            throw new WalletNotFound(("Payee's"));}
+        if (amount <= 0) {
             throw new AmountGreaterThanZero();
         }
 
@@ -105,6 +112,6 @@ public class WalletService {
         payeeWallet.setBalance(payeeWallet.getBalance() + amount);
         repo.save(payerWallet);
         repo.save(payeeWallet);
-        return "Money transferred successfully";
+        return transaction;
     }
 }
