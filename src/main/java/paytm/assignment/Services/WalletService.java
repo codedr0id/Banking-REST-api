@@ -63,7 +63,8 @@ public class WalletService {
         }
 
         if (!user.isWalletActive()) {
-            throw new WalletNotFound("");}
+            throw new WalletNotFound("");
+        }
 
         if (amount <= 0) {
             throw new AmountGreaterThanZero();

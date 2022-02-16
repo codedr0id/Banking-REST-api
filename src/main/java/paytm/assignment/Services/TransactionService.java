@@ -17,7 +17,7 @@ public class TransactionService {
         return repo.findAllByFromMobileNo(payer);
     }
 
-    public Transaction getTransaction(String id){
+    public Transaction getTransaction(String id) {
         return repo.findById(id).get();
     }
 

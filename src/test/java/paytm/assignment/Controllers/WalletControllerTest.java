@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import paytm.assignment.DTO.ResponseObject;
-import paytm.assignment.Models.User;
 import paytm.assignment.Models.Wallet;
 import paytm.assignment.Services.WalletService;
 
