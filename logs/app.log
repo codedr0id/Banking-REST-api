@@ -1,18 +1,161 @@
-2022-02-15 19:01:04,553 INFO p.a.Application [main] Application started
-2022-02-15 19:01:04,724 INFO p.a.Application [main] Starting Application using Java 17.0.2 on PPBNOMBPBT-220.local with PID 57390 (/Users/mehul.lathi/IdeaProjects/Banking-REST-api/target/classes started by mehul.lathi in /Users/mehul.lathi/IdeaProjects/Banking-REST-api)
-2022-02-15 19:01:04,725 DEBUG p.a.Application [main] Running with Spring Boot v2.6.2, Spring v5.3.14
-2022-02-15 19:01:04,725 INFO p.a.Application [main] No active profile set, falling back to default profiles: default
-2022-02-15 19:01:06,415 INFO p.a.Application [main] Started Application in 1.829 seconds (JVM running for 2.532)
-2022-02-15 19:01:21,604 INFO p.a.C.UserController [http-nio-8080-exec-2] Showing List of all Users
-2022-02-15 19:02:19,296 INFO p.a.C.UserController [http-nio-8080-exec-4] Fetching User with username: godfather
-2022-02-15 19:02:19,313 DEBUG p.a.C.UserController [http-nio-8080-exec-4] User - godfather found successfully
-2022-02-15 19:02:33,796 INFO p.a.C.UserController [http-nio-8080-exec-5] Fetching User with username: godfathers
-2022-02-15 19:02:33,803 ERROR p.a.C.UserController [http-nio-8080-exec-5] User - godfathers not found
-2022-02-15 19:02:44,923 INFO p.a.C.UserController [http-nio-8080-exec-6] Fetching User with username: sparky
-2022-02-15 19:02:44,929 DEBUG p.a.C.UserController [http-nio-8080-exec-6] User - sparky found successfully
-2022-02-15 19:04:58,909 INFO p.a.C.UserController [http-nio-8080-exec-9] Adding new User with username: raghu
-2022-02-15 19:04:58,938 DEBUG p.a.C.UserController [http-nio-8080-exec-9] User with username: raghu added successfully
-2022-02-15 19:06:27,142 INFO p.a.C.UserController [http-nio-8080-exec-1] Adding new User with username: raghu
-2022-02-15 19:06:27,149 ERROR p.a.C.UserController [http-nio-8080-exec-1] User with username: raghu already exists
-2022-02-16 00:38:37,246 INFO p.a.C.UserController [http-nio-8080-exec-4] Adding new User with username: raghu
-2022-02-16 00:38:37,273 ERROR p.a.C.UserController [http-nio-8080-exec-4] User with username: raghu already exists
+25-02-2022 12:51:40.819 [main] INFO  paytm.assignment.Application.main - Application started
+25-02-2022 12:51:40.984 [main] INFO  paytm.assignment.Application.logStarting - Starting Application using Java 17.0.2 on PPBNOMBPBT-220.local with PID 32569 (/Users/mehul.lathi/IdeaProjects/Banking-REST-api/target/classes started by mehul.lathi in /Users/mehul.lathi/IdeaProjects/Banking-REST-api)
+25-02-2022 12:51:40.986 [main] DEBUG paytm.assignment.Application.logStarting - Running with Spring Boot v2.6.2, Spring v5.3.14
+25-02-2022 12:51:40.986 [main] INFO  paytm.assignment.Application.logStartupProfileInfo - No active profile set, falling back to default profiles: default
+25-02-2022 12:51:42.679 [main] DEBUG paytm.assignment.filter.JwtAuthenticationFilter.init - Filter 'jwtAuthenticationFilter' configured for use
+25-02-2022 12:51:43.078 [main] INFO  paytm.assignment.Application.logStarted - Started Application in 2.228 seconds (JVM running for 2.875)
+25-02-2022 12:51:58.727 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:51:58.727 [http-nio-8080-exec-2] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:51:58.727 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: null
+25-02-2022 12:51:58.727 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 12:51:58.772 [http-nio-8080-exec-2] INFO  paytm.assignment.Controllers.JwtController.createAuthenticationToken - Authorization Request Received From Username : godfather, Password : 1111
+25-02-2022 12:51:58.772 [http-nio-8080-exec-2] DEBUG paytm.assignment.Controllers.JwtController.createAuthenticationToken - Authenticating user !!!!!!!
+25-02-2022 12:51:58.773 [http-nio-8080-exec-2] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 12:51:58.800 [http-nio-8080-exec-2] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 12:51:58.801 [http-nio-8080-exec-2] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 12:51:58.802 [http-nio-8080-exec-2] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 12:51:58.802 [http-nio-8080-exec-2] INFO  paytm.assignment.utils.JwtUtil.generateToken - JwtUtil : Generating Token For User 
+25-02-2022 12:51:58.814 [http-nio-8080-exec-2] DEBUG paytm.assignment.Controllers.JwtController.createAuthenticationToken - Token : eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2RmYXRoZXIiLCJleHAiOjE2NDU4MDk3MTgsImlhdCI6MTY0NTc3MzcxOH0.Noh1jrTxXsjEqXFASykFpqCsyU7UsJztLEjMB6719Dk
+25-02-2022 12:53:03.673 [http-nio-8080-exec-5] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:53:03.673 [http-nio-8080-exec-5] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:53:03.674 [http-nio-8080-exec-5] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2RmYXRoZXIiLCJleHAiOjE2NDU4MDk3MTgsImlhdCI6MTY0NTc3MzcxOH0.Noh1jrTxXsjEqXFASykFpqCsyU7UsJztLEjMB6719Dk
+25-02-2022 12:53:03.674 [http-nio-8080-exec-5] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 12:53:03.691 [http-nio-8080-exec-5] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Username Fetched From Token ::  godfather
+25-02-2022 12:53:03.691 [http-nio-8080-exec-5] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  User fetched from both API and Token
+25-02-2022 12:53:03.691 [http-nio-8080-exec-5] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 12:53:03.697 [http-nio-8080-exec-5] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 12:53:03.697 [http-nio-8080-exec-5] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - User whose token used :: godfather
+25-02-2022 12:53:03.697 [http-nio-8080-exec-5] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - User who request Api call :: null
+25-02-2022 12:53:03.697 [http-nio-8080-exec-5] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - null is trying to attack .
+25-02-2022 12:54:48.806 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:54:48.806 [http-nio-8080-exec-8] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:54:48.807 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2RmYXRoZXIiLCJleHAiOjE2NDU4MDk3MTgsImlhdCI6MTY0NTc3MzcxOH0.Noh1jrTxXsjEqXFASykFpqCsyU7UsJztLEjMB6719Dk
+25-02-2022 12:54:48.807 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : godfather
+25-02-2022 12:54:48.808 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Username Fetched From Token ::  godfather
+25-02-2022 12:54:48.809 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  User fetched from both API and Token
+25-02-2022 12:54:48.809 [http-nio-8080-exec-8] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 12:54:48.815 [http-nio-8080-exec-8] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 12:54:48.817 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  Validating User
+25-02-2022 12:54:48.824 [http-nio-8080-exec-8] INFO  paytm.assignment.Controllers.UserController.add - Adding new User with username: raghu
+25-02-2022 12:54:48.905 [http-nio-8080-exec-8] DEBUG paytm.assignment.Controllers.UserController.add - User with username: raghu added successfully
+25-02-2022 12:56:36.208 [http-nio-8080-exec-10] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:56:36.208 [http-nio-8080-exec-10] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:56:36.209 [http-nio-8080-exec-10] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: null
+25-02-2022 12:56:36.209 [http-nio-8080-exec-10] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 12:56:43.438 [http-nio-8080-exec-1] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:56:43.438 [http-nio-8080-exec-1] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:56:43.438 [http-nio-8080-exec-1] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: null
+25-02-2022 12:56:43.439 [http-nio-8080-exec-1] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 12:56:43.500 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:56:43.500 [http-nio-8080-exec-2] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:56:43.500 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: null
+25-02-2022 12:56:43.500 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 12:58:26.688 [main] INFO  paytm.assignment.Application.main - Application started
+25-02-2022 12:58:26.867 [main] INFO  paytm.assignment.Application.logStarting - Starting Application using Java 17.0.2 on PPBNOMBPBT-220.local with PID 33092 (/Users/mehul.lathi/IdeaProjects/Banking-REST-api/target/classes started by mehul.lathi in /Users/mehul.lathi/IdeaProjects/Banking-REST-api)
+25-02-2022 12:58:26.868 [main] DEBUG paytm.assignment.Application.logStarting - Running with Spring Boot v2.6.2, Spring v5.3.14
+25-02-2022 12:58:26.868 [main] INFO  paytm.assignment.Application.logStartupProfileInfo - No active profile set, falling back to default profiles: default
+25-02-2022 12:58:28.310 [main] DEBUG paytm.assignment.filter.JwtAuthenticationFilter.init - Filter 'jwtAuthenticationFilter' configured for use
+25-02-2022 12:58:28.659 [main] INFO  paytm.assignment.Application.logStarted - Started Application in 1.932 seconds (JVM running for 2.592)
+25-02-2022 12:58:41.901 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:58:41.901 [http-nio-8080-exec-2] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:58:41.902 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: null
+25-02-2022 12:58:41.902 [http-nio-8080-exec-2] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 12:58:41.947 [http-nio-8080-exec-2] INFO  paytm.assignment.Controllers.JwtController.createAuthenticationToken - Authorization Request Received From Username : godfather, Password : 1111
+25-02-2022 12:58:41.948 [http-nio-8080-exec-2] DEBUG paytm.assignment.Controllers.JwtController.createAuthenticationToken - Authenticating user !!!!!!!
+25-02-2022 12:58:41.948 [http-nio-8080-exec-2] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 12:58:41.974 [http-nio-8080-exec-2] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 12:58:41.975 [http-nio-8080-exec-2] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 12:58:41.977 [http-nio-8080-exec-2] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 12:58:41.977 [http-nio-8080-exec-2] INFO  paytm.assignment.utils.JwtUtil.generateToken - JwtUtil : Generating Token For User 
+25-02-2022 12:58:41.989 [http-nio-8080-exec-2] DEBUG paytm.assignment.Controllers.JwtController.createAuthenticationToken - Token : eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2RmYXRoZXIiLCJleHAiOjE2NDU4MTAxMjEsImlhdCI6MTY0NTc3NDEyMX0.pE-WoyciNgvk_8CJj6zeoCB3WDzBGjCG-08K9ED2Qw4
+25-02-2022 12:58:57.186 [http-nio-8080-exec-3] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:58:57.186 [http-nio-8080-exec-3] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:58:57.187 [http-nio-8080-exec-3] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2RmYXRoZXIiLCJleHAiOjE2NDU4MTAxMjEsImlhdCI6MTY0NTc3NDEyMX0.pE-WoyciNgvk_8CJj6zeoCB3WDzBGjCG-08K9ED2Qw4
+25-02-2022 12:58:57.187 [http-nio-8080-exec-3] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 12:58:57.206 [http-nio-8080-exec-3] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Username Fetched From Token ::  godfather
+25-02-2022 12:58:57.206 [http-nio-8080-exec-3] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  User fetched from both API and Token
+25-02-2022 12:58:57.206 [http-nio-8080-exec-3] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 12:58:57.213 [http-nio-8080-exec-3] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 12:58:57.215 [http-nio-8080-exec-3] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  Validating User
+25-02-2022 12:58:57.219 [http-nio-8080-exec-3] INFO  paytm.assignment.Controllers.UserController.add - Adding new User with username: raghu
+25-02-2022 12:58:57.296 [http-nio-8080-exec-3] DEBUG paytm.assignment.Controllers.UserController.add - User with username: raghu added successfully
+25-02-2022 12:59:36.101 [http-nio-8080-exec-4] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 12:59:36.102 [http-nio-8080-exec-4] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 12:59:36.102 [http-nio-8080-exec-4] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2RmYXRoZXIiLCJleHAiOjE2NDU4MTAxMjEsImlhdCI6MTY0NTc3NDEyMX0.pE-WoyciNgvk_8CJj6zeoCB3WDzBGjCG-08K9ED2Qw4
+25-02-2022 12:59:36.102 [http-nio-8080-exec-4] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 12:59:36.104 [http-nio-8080-exec-4] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Username Fetched From Token ::  godfather
+25-02-2022 12:59:36.104 [http-nio-8080-exec-4] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  User fetched from both API and Token
+25-02-2022 12:59:36.104 [http-nio-8080-exec-4] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 12:59:36.109 [http-nio-8080-exec-4] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 12:59:36.111 [http-nio-8080-exec-4] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  Validating User
+25-02-2022 13:02:31.950 [http-nio-8080-exec-6] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 13:02:31.951 [http-nio-8080-exec-6] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 13:02:31.951 [http-nio-8080-exec-6] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2RmYXRoZXIiLCJleHAiOjE2NDU4MTAxMjEsImlhdCI6MTY0NTc3NDEyMX0.pE-WoyciNgvk_8CJj6zeoCB3WDzBGjCG-08K9ED2Qw
+25-02-2022 13:02:31.951 [http-nio-8080-exec-6] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 13:02:31.953 [http-nio-8080-exec-6] ERROR org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/].[dispatcherServlet].log - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+io.jsonwebtoken.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:212) ~[jjwt-0.2.jar:0.2]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parse(DefaultJwtParser.java:230) ~[jjwt-0.2.jar:0.2]
+	at io.jsonwebtoken.impl.DefaultJwtParser.parseClaimsJws(DefaultJwtParser.java:290) ~[jjwt-0.2.jar:0.2]
+	at paytm.assignment.utils.JwtUtil.extractAllClaims(JwtUtil.java:38) ~[classes/:?]
+	at paytm.assignment.utils.JwtUtil.extractClaim(JwtUtil.java:34) ~[classes/:?]
+	at paytm.assignment.utils.JwtUtil.extractUsername(JwtUtil.java:25) ~[classes/:?]
+	at paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal(JwtAuthenticationFilter.java:51) ~[classes/:?]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:110) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:80) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:336) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:211) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:183) ~[spring-security-web-5.6.1.jar:5.6.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.14.jar:5.3.14]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:540) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:382) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:895) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1732) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.56.jar:9.0.56]
+	at java.lang.Thread.run(Thread.java:833) [?:?]
+25-02-2022 13:02:36.856 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Filtering The Request
+25-02-2022 13:02:36.856 [http-nio-8080-exec-8] WARN  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Getting Authorization Token From Authorization : 'Bearer Token' 
+25-02-2022 13:02:36.856 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Token :: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJnb2RmYXRoZXIiLCJleHAiOjE2NDU4MTAxMjEsImlhdCI6MTY0NTc3NDEyMX0.pE-WoyciNgvk_8CJj6zeoCB3WDzBGjCG-08K9ED2Qw4
+25-02-2022 13:02:36.856 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : User Requesting API Call : null
+25-02-2022 13:02:36.858 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal - Filter : Username Fetched From Token ::  godfather
+25-02-2022 13:02:36.858 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  User fetched from both API and Token
+25-02-2022 13:02:36.858 [http-nio-8080-exec-8] INFO  paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : Verifying User : godfather
+25-02-2022 13:02:36.866 [http-nio-8080-exec-8] DEBUG paytm.assignment.Services.CustomUserDetailsService.loadUserByUsername - CustomUserDetailsService : User is present in Database
+25-02-2022 13:02:36.868 [http-nio-8080-exec-8] INFO  paytm.assignment.filter.JwtAuthenticationFilter.doFilterInternal -  Validating User

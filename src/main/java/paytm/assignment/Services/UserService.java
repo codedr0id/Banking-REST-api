@@ -22,6 +22,7 @@ public class UserService {
 
     //Saving User to DB
     public User save(User user) {
+        user.setRoles("USER");
         return repo.save(user);
     }
 

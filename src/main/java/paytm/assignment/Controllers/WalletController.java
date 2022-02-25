@@ -1,5 +1,7 @@
 package paytm.assignment.Controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,19 +25,25 @@ public class WalletController {
     @Autowired
     WalletService walletService;
 
+    private static final Logger logger = LogManager.getLogger(WalletController.class);
+
     @GetMapping("/wallets")
     public List<Wallet> getWallets() {
+        logger.info("Getting all wallets");
         return walletService.getAllWallets();
     }
 
     @GetMapping("/wallet/{mobileNo}")
     public Wallet getWallet(@PathVariable("mobileNo") String mobileNo) {
+        logger.info("Getting wallet for mobileNo: " + mobileNo);
         return walletService.getWallet(mobileNo);
     }
 
     @PostMapping("/create-wallet/{mobileNo}")
     public ResponseEntity<ResponseObject> createWallet(@PathVariable("mobileNo") String mobileNo) {
-        try {walletService.createWallet(mobileNo);
+        try {
+            logger.info("Wallet created for mobileNo: " + mobileNo);
+            walletService.createWallet(mobileNo);
             return new ResponseEntity<>(new ResponseObject(HttpStatus.CREATED.value(), "Wallet created", walletService.getWallet(mobileNo)), HttpStatus.CREATED);
         } catch (Exception e){
             return new ResponseEntity<>(new ResponseObject(HttpStatus.FORBIDDEN.value(), e.getLocalizedMessage(), null), HttpStatus.FORBIDDEN);
@@ -46,6 +54,7 @@ public class WalletController {
     @PostMapping("/deposit/{mobileNo}/{amount}")
     public ResponseEntity<ResponseObject> deposit(@PathVariable("mobileNo") String mobileNo, @PathVariable("amount") int amount) throws UserNotFound, AmountGreaterThanZero, WalletNotFound {
         try {
+            logger.info("Depositing amount: " + amount + " for mobileNo: " + mobileNo);
             walletService.deposit(mobileNo, (double) amount);
             return new ResponseEntity<>(new ResponseObject(HttpStatus.OK.value(), "Money added", walletService.getWallet(mobileNo)), HttpStatus.OK);
         } catch(Exception e){
@@ -57,6 +66,7 @@ public class WalletController {
     @PostMapping("/transfer/{payerMobileNo}/{payeeMobileNo}/{amount}")
     public ResponseEntity<ResponseObject> transfer(@PathVariable("payerMobileNo") String payerMobileNo, @PathVariable("payeeMobileNo") String payeeMobileNo, @PathVariable("amount") Double amount) {
         try {
+            logger.info("Transferring amount: " + amount + " from mobileNo: " + payerMobileNo + " to mobileNo: " + payeeMobileNo);
             walletService.transfer(payerMobileNo, payeeMobileNo, (Double) amount);
             return new ResponseEntity<>(new ResponseObject(HttpStatus.OK.value(), "Transfer successful", new TransferDetails(payerMobileNo, payeeMobileNo, amount)), HttpStatus.OK);
         } catch (Exception e) {

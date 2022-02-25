@@ -12,6 +12,10 @@ public class ResponseObject {
         this.response = response;
     }
 
+    public ResponseObject() {
+
+    }
+
     public int getStatusCode() {
         return statusCode;
     }

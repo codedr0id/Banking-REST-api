@@ -1,5 +1,7 @@
 package paytm.assignment.Services;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import paytm.assignment.Exceptions.*;
@@ -23,6 +25,8 @@ public class WalletService {
     @Autowired
     private TransactionService transactionService;
 
+    private static final Logger logger = LogManager.getLogger(WalletService.class);
+
     public List<Wallet> getAllWallets() {
         return repo.findAll();
     }
@@ -39,10 +43,12 @@ public class WalletService {
         User user = service.getByPhoneNo(mobileNo);
 
         if (user == null) {
+            logger.error("User not found");
             throw new UserNotFound("");
         }
 
         if (user.isWalletActive()) {
+            logger.error("Wallet already exists");
             throw new WalletAlreadyExists();
         }
 
@@ -59,14 +65,17 @@ public class WalletService {
         User user = service.getByPhoneNo(mobileNo);
 
         if (user == null) {
+            logger.error("User not found");
             throw new UserNotFound("");
         }
 
         if (!user.isWalletActive()) {
+            logger.error("Wallet not active");
             throw new WalletNotFound("");
         }
 
         if (amount <= 0) {
+            logger.error("Amount should be greater than zero");
             throw new AmountGreaterThanZero();
         }
 
@@ -83,10 +92,12 @@ public class WalletService {
         User payee = service.getByPhoneNo(payeeNo);
 
         if (payer == null) {
+            logger.error("Payer not found");
             throw new UserNotFound("Payer");
         }
 
         if (payee == null) {
+            logger.error("Payee not found");
             throw new UserNotFound("Payee");
         }
 
@@ -95,6 +106,7 @@ public class WalletService {
 //        } else if (!payee.isWalletActive()) {
 //            throw new WalletNotFound(("Payee's"));}
         if (amount <= 0) {
+            logger.error("Amount should be greater than zero");
             throw new AmountGreaterThanZero();
         }
 
@@ -102,10 +114,12 @@ public class WalletService {
         Wallet payeeWallet = repo.findByMobileNo(payeeNo);
 
         if (payerWallet.getBalance() < amount) {
+            logger.error("Insufficient balance in payer's wallet");
             throw new InsufficientBalance();
         }
 
         Transaction transaction = new Transaction(payerNo, payeeNo, amount, "Transfer", new Date());
+        logger.debug("Transaction with id: "+ transaction.getId() + " created");
         transactionService.saveTransaction(transaction);
 //        payerWallet.addTransaction(transactionService.getTransaction(transaction.getId()));
 //        payerWallet.addTransaction(transactionService.getTransaction(transaction.getId()));
